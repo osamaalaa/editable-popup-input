@@ -1,28 +1,56 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Editable Component Demo</h1>
+    <h2>Text Field</h2>
+    <input-editable
+      label="Text Field"
+      :value="textValue"
+      fieldType="text"
+      :valueType="'text'"
+      :placeHolder="'Enter text'"
+      :styles="'minWidth: 215px; marginLeft: 200px'"
+      @update="updateValue"
+    />
+    <h2>Select Field</h2>
+    
+    <input-editable
+      label="Select Field"
+      :value="selectValue"
+      fieldType="select"
+      :options="selectOptions"
+      :placeHolder="'Select an option'"
+      :styles="'minWidth: 215px; marginLeft: 200px'"
+      @update="updateValue"
+    /> 
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import InputEditable from './components/InputEditable.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    InputEditable
+  },
+  data() {
+    return {
+      textValue: '',
+      selectValue: '',
+      selectOptions: {
+        items: [
+          { value: 'option1', label: 'Option 1' },
+          { value: 'option2', label: 'Option 2' },
+          { value: 'option3', label: 'Option 3' }
+        ],
+        labelKey: 'label'
+      }
+    };
+  },
+  methods: {
+    updateValue(newValue) {
+      console.log('Updated value:', newValue);
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
